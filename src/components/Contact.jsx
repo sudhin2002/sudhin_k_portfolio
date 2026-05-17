@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, Github, Linkedin, Instagram } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, MapPin, Send, Github, Linkedin, Instagram, CheckCircle } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -9,12 +9,35 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    alert('Message sent successfully!');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsSubmitting(true);
+    
+    const formUrl = "https://docs.google.com/forms/u/0/d/e/1FAIpQLScAGRoBb2eYtXfl1CnM7BcWnO2bmcKSwDZsuyGDRqicTEZbKw/formResponse";
+    
+    const data = new FormData();
+    data.append("entry.1862113939", formData.name);
+    data.append("entry.1054830640", formData.email);
+    data.append("entry.2055052880", formData.subject);
+    data.append("entry.2103437314", formData.message);
+
+    try {
+      await fetch(formUrl, {
+        method: "POST",
+        mode: "no-cors",
+        body: data
+      });
+      setShowPopup(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      console.error("Error submitting form", error);
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -119,16 +142,53 @@ const Contact = () => {
 
               <button 
                 type="submit"
-                className="mt-4 px-8 py-4 rounded-xl bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-500 hover:to-purple-500 text-white font-bold text-lg transition-all shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)] hover:-translate-y-1 flex items-center justify-center gap-3 group w-full md:w-auto md:self-end"
+                disabled={isSubmitting}
+                className="mt-4 px-8 py-4 rounded-xl bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-500 hover:to-purple-500 text-white font-bold text-lg transition-all shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)] hover:-translate-y-1 flex items-center justify-center gap-3 group w-full md:w-auto md:self-end disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:-translate-y-0 disabled:hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]"
               >
-                Send Message
-                <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+                <Send size={20} className={`${isSubmitting ? 'animate-pulse' : 'group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform'}`} />
               </button>
             </motion.form>
           </div>
 
         </div>
       </div>
+
+      {/* Success Popup */}
+      <AnimatePresence>
+        {showPopup && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm" 
+              onClick={() => setShowPopup(false)}
+            ></motion.div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 20 }}
+              transition={{ type: "spring", bounce: 0.4 }}
+              className="relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl max-w-sm w-full text-center flex flex-col items-center z-10"
+            >
+              <div className="w-20 h-20 bg-green-100 dark:bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(34,197,94,0.3)]">
+                <CheckCircle size={40} />
+              </div>
+              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Thank You!</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg">
+                Your message has been successfully sent. I will get back to you soon.
+              </p>
+              <button 
+                onClick={() => setShowPopup(false)}
+                className="px-8 py-4 w-full rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold text-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-all active:scale-95 shadow-lg"
+              >
+                Close
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
