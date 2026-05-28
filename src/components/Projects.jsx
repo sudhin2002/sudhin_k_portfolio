@@ -4,7 +4,6 @@ import { Github, ExternalLink, CheckCircle2 } from 'lucide-react';
 
 // ES Module imports for local assets
 import weighmasterImg from '../assets/projects/weighmaster.png';
-
 const projectsData = [
   {
     title: "Weigh Master",
@@ -17,7 +16,7 @@ const projectsData = [
       "Product and order management",
       "Fraud detection support"
     ],
-    github: "https://github.com/sudhin2002",
+    github: "https://github.com/sudhin2002/Weigh-Master",
     live: "#",
     image: weighmasterImg
   },
@@ -31,7 +30,7 @@ const projectsData = [
       "Transaction validation",
       "Blockchain transaction history"
     ],
-    github: "https://github.com/sudhin2002",
+    github: "https://github.com/sudhin2002/ERB",
     live: "#",
     image: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
@@ -48,6 +47,35 @@ const projectsData = [
     github: "https://github.com/sudhin2002",
     live: "#",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    title: "Dual-Stream",
+    description: "A real-time media transmission system for simultaneous webcam and screen sharing using WebRTC.",
+    tech: ["React", "WebRTC", "JavaScript", "Node.js"],
+    features: [
+      "Concurrent webcam and screen sharing",
+      "Real-time video streaming",
+      "Digital timestamp overlay",
+      "Single RTCPeerConnection setup",
+      "Host dashboard monitoring"
+    ],
+    github: "https://github.com/sudhin2002/Dual-Stream",
+    live: "#",
+    image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    title: "Grow Kerala",
+    description: "A digital platform focused on regional development, public engagement, and community-driven initiatives in Kerala.",
+    tech: ["Angular", "Python", "Django", "PostgreSQL"],
+    features: [
+      "Community engagement platform",
+      "Regional development initiatives",
+      "Interactive user interface",
+      "Backend data management"
+    ],
+    github: "https://github.com/sudhin2002/Grow-Kerala",
+    live: "#",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   }
 ];
 
