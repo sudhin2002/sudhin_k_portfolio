@@ -61,7 +61,7 @@ const projectsData = [
     ],
     github: "https://github.com/sudhin2002/Dual-Stream",
     live: "#",
-    image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://www.magnific.com/free-ai-image/neon-gamer-setup_413716605.htm#fromView=keyword&page=1&position=0&uuid=cb03780c-3adc-4f40-8452-9d02897620df&query=Dual+screen+wallpaper+streaming"
   },
   {
     title: "Grow Kerala",
