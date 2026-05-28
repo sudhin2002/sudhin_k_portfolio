@@ -75,7 +75,8 @@ const projectsData = [
     ],
     github: "https://github.com/sudhin2002/Grow-Kerala",
     live: "#",
-    image: "https://images.unsplash.com/photo-1664575602554-2087b04935a5?auto=format&fit=crop&w=800&q=80"
+     image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+
     
   }
 ];
